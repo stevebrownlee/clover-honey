@@ -163,7 +163,7 @@ export const Register = (props) => {
     let navigate = useNavigate()
 
     const registerNewUser = () => {
-        fetch("http://localhost:8088/users", {
+        return fetch("http://localhost:8088/users", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -173,7 +173,11 @@ export const Register = (props) => {
             .then(res => res.json())
             .then(createdUser => {
                 if (createdUser.hasOwnProperty("id")) {
-                    localStorage.setItem("honey_customer", createdUser.id)
+                    localStorage.setItem("honey_user", JSON.stringify({
+                        id: createdUser.id,
+                        staff: createdUser.isStaff
+                    }))
+
                     navigate("/")
                 }
             })
@@ -184,11 +188,12 @@ export const Register = (props) => {
         return fetch(`http://localhost:8088/users?email=${customer.email}`)
             .then(res => res.json())
             .then(response => {
-                if (response.length === 0) {
+                if (response.length > 0) {
+                    // Duplicate email. No good.
                     window.alert("Account with that email address already exists")
                 }
                 else {
-                    // Good email, create user
+                    // Good email, create user.
                     registerNewUser()
                 }
             })
@@ -199,7 +204,6 @@ export const Register = (props) => {
         copy[evt.target.id] = evt.target.value
         setCustomer(copy)
     }
-
 
     return (
         <main style={{ textAlign: "center" }}>
@@ -218,13 +222,13 @@ export const Register = (props) => {
                         placeholder="Email address" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="email"> I am an employee </label>
                     <input onChange={(evt) => {
                         const copy = {...customer}
                         copy.isStaff = evt.target.checked
                         setCustomer(copy)
                     }}
-                        type="checkbox" id="isStaff" className="form-control" />
+                        type="checkbox" id="isStaff" />
+                    <label htmlFor="email"> I am an employee </label>
                 </fieldset>
                 <fieldset>
                     <button type="submit"> Register </button>
@@ -355,10 +359,5 @@ fieldset {
 .button--close {
     position: relative;
     bottom: -2rem;
-}
-
-.dialog {
-    min-width: 15rem;
-    min-height: 5rem;
 }
 ' > ./src/components/auth/Login.css

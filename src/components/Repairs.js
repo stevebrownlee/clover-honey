@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom"
-import { ApplicationViews } from "./ApplicationViews"
+import { ApplicationViews } from "./views/ApplicationViews"
 import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
