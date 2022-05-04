@@ -8,7 +8,7 @@ export const TicketList = ({ currentSearchStateFromParent }) => {
     const user = JSON.parse(localStorage.getItem("honey_user"))
 
     /*
-    This is for phase 1 of project
+    This is for phase 4 of project (account for Employees searching for tickets)
     */
 
     useEffect(
@@ -42,7 +42,7 @@ export const TicketList = ({ currentSearchStateFromParent }) => {
         current user is a customer and update a second
     */
     /*
-    This is for phase 1 of project
+    This is for phase 2 of project (account for Customer users)
     */
 
     useEffect(
@@ -59,7 +59,7 @@ export const TicketList = ({ currentSearchStateFromParent }) => {
     )
 
     /*
-    This is for phase 1 of project
+    This is for phase 3 of project (account for Employees wanting to see emergency tickets)
     */
 
     useEffect(

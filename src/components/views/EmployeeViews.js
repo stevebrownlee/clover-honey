@@ -1,5 +1,4 @@
 import { Outlet, Route, Routes } from "react-router-dom"
-import { TicketList } from "../tickets/TicketList"
 import { TicketParent } from "../tickets/TicketParent"
 
 export const EmployeeViews = () => {
